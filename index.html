@@ -34,7 +34,7 @@
         <div class="nav-list">
           <ul>
             <li><i class="fa-solid fa-house"></i><a href="#">Dashboard</a></li>
-            <li><i class="fa-solid fa-chart-simple"></i><a href="#">Employees</a></li>
+            <li id="homeEmp" onclick=" homeEmployee()"><i class="fa-solid fa-chart-simple"></i><a href="#">Employees</a></li>
             <li><i class="fa-solid fa-user"></i><a href="#">My Profile</a></li>
             <li><i class="fa-solid fa-right-from-bracket"></i><a href="#">Logout</a></li>
           </ul>
@@ -54,7 +54,8 @@
             <h1>Employees</h1>
           </div>
           <div class="search-section">
-            <input type="search" placeholder="Search&#128270 " id="searchEmployee" onkeyup="searchEmployee()">
+            <!-- <input type="search" placeholder="&#xF002; Search" id="searchEmployee" onkeyup="searchEmployee()"> -->
+            <input type="search" placeholder="&#xF002; Search" style="font-family:Arial,FontAwesome; padding: 10px;"/ id="searchEmployee" onkeyup="searchEmployee()">
             <i class="fa-regular fa-bell"></i>
             <div class="searchImg">
               <img src="/images/Elipse 5.png" alt="img">
@@ -80,7 +81,7 @@
               <p>of 10</p>
             </div>
             <div class="btn">
-              <button class="heading-btn" onclick="employeebtn()">Add Employee</button>
+              <button class="heading-btn" type="button" onclick="employeebtn()">Add Employee</button>
             </div>
           </div>
           <div class="main-table">
@@ -168,17 +169,20 @@
           </div>
           <!-- 1.row -->
           <div class="row">
-            <label for="input-file" id="drop-area">
-              <div class="col-md-12">
+              <div class="col-md-12 upload_image">
                 <input type="file" accept="image/*" id="input-file" hidden>
                 <div class="card align-items-center py-3 rounded-4" id="img-view">
                   <i class="fa-solid fa-cloud-arrow-up"></i>
                   <h5 class="card-heading">Upload Image</h5>
                   <span>PNG, JPG files are allowed</span>
+                  <button type="button" class="btn btn-primary">
+                    <label for="input-file" id="drop-area">click here to upload image
+                  </label>
+                </button>
                 </div>
               </div>
             </label>
-          </div>
+          </div>  
           <!-- 2.row -->
           <div class="row">
             <div class="input-section col-md-3">
@@ -321,16 +325,16 @@
 
           <div class="row">
             <div class="edit-heading col-md-5">
-              <label for="editForm-input-file" id="editForm-drop-area">
-                <div class="card align-items-center edit-employee rounded-4">
+            
+                <div class="align-items-center edit-employee rounded-4 cards">
                   <input type="file" accept="image/*" id="editForm-input-file" hidden>
                   <div id="editForm-img-view">
                     <img id="image-preview" alt="" style="width: 110px; height: 110px;">
                   </div>
                 </div>
-              </label>
+             
               <div class="edit-btn col-md-3">
-                <button onclick="changeImage()">Change</button>
+                <button onclick="changeImage(event)">  <label for="editForm-input-file" id="editForm-drop-area">Change</label></button>
               </div>
             </div>
           </div>
@@ -468,27 +472,27 @@
   <!-- employee-added-successfully -->
   <div id="added-emp">
     <div class="delete_content">
-      <h3 style="color:green;">Employee Added Successfully</h3>
+      <h3 style="color:green;">Added Successfully</h3>
     </div>
     <div class="delete_btn">
 
-      <button type="button" class="btn btn-success btn-delete" id="emp_del" onclick=" closeAddedEmployee()">OK</button>
+      <button type="button" class="btn btn-success btn-delete" id="emp_del" onclick=" closeAddedEmployee(location.reload())">OK</button>
     </div>
   </div>
   <!-- edit-employee-successfully -->
   <div id="edited-emp">
     <div class="delete_content">
-      <h3 style="color:darkblue;">Employee Edited Successfully</h3>
+      <h3 style="color:darkblue;"> Edited Successfully</h3>
     </div>
     <div class="delete_btn">
 
-      <button type="button" class="btn btn-primary btn-delete" id="emp_del" onclick=" closeEditedEmployee()">OK</button>
+      <button type="button" class="btn btn-primary btn-delete" id="emp_del" onclick="closeEditedEmployee(location.reload())">OK</button>
     </div>
   </div>
   <!-- deleted-employee -->
   <div id="deleted-emp">
     <div class="delete_content">
-      <h3 style="color:red;">Employee Deleted Successfully</h3>
+      <h3 style="color:red;">Deleted Successfully</h3>
     </div>
     <div class="delete_btn">
       <button type="button" class="btn btn-danger btn-delete" id="emp_del" onclick=" closeDeketedEmployee()">OK</button>

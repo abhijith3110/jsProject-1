@@ -96,5 +96,13 @@ function view_Employee(_employeeid) {
                   </div>
                 </div>
               </div>`
+              const empName=document.getElementById("empName");
+              empName.innerHTML=`Dashboard /${data.firstName + " " + data.lastName}/ ${data.email}
+              `
     });
+
+}
+//reDirecting to the home page
+function homeEmployee(){
+  window.location.href=`index.html`
 }

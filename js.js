@@ -88,6 +88,8 @@ function edit_employee(empID) {
     .catch(error => {
       console.error('Error:', error);
     });
+
+
 }
 function close_edit_form() {
   var close_btn = document.getElementById("edit-employee-form");
@@ -345,11 +347,22 @@ async function editEmployee(empID) {
     .then(res => {
       return res.json();
     })
+
+
+    const fileUpload = document.getElementById("editForm-input-file");
+    const formData = new FormData();
+    formData.append("avatar", fileUpload.files[0]);
+
+    fetch(`http://localhost:3000/employees/${empID}/avatar`, {
+        method: 'POST',
+        body: formData,
+    })
+
     .then(data => {
       get_emp();
       close_edit_form();
       editedEmployee();
-    })
+    })  
     .catch(error => {
       console.error('Error adding employee:', error);
     });
@@ -358,6 +371,7 @@ async function editEmployee(empID) {
 
 
 // -----------------------------------------form-validation-------------------------------------------
+
 function validateForm() {
 
   const errorAlerts = document.querySelectorAll('.error-alert');
@@ -377,7 +391,7 @@ function validateForm() {
   const city = document.getElementById("city").value;
   const pincode = document.getElementById("pin").value;
 
-  // ----------Regular expressions for validation--------------------
+  // Regular expressions for validation
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const phoneRegex = /^\d{10}$/;
   const nameRegex = /^[a-zA-Z'-]+$/;
@@ -427,7 +441,6 @@ function validateForm() {
     displayError("address");
     isValid = false;
   }
-
   if (country === "Select") {
     displayError("country");
     isValid = false;
@@ -448,8 +461,30 @@ function validateForm() {
     isValid = false;
   }
 
+  function hideErrorOnKeyPress(inputId) {
+    const inputElement = document.getElementById(inputId);
+    const errorAlert = document.querySelector(`#${inputId} + .error-alert`);
+    
+    inputElement.addEventListener('input', function() {
+      errorAlert.style.display = 'none';
+    });
+  }
+  hideErrorOnKeyPress("salutation");
+  hideErrorOnKeyPress("FirstName");
+  hideErrorOnKeyPress("LastName");
+  hideErrorOnKeyPress("Email");
+  hideErrorOnKeyPress("Phone");
+  hideErrorOnKeyPress("dob");
+  hideErrorOnKeyPress("Qualifications");
+  hideErrorOnKeyPress("address");
+  hideErrorOnKeyPress("country");
+  hideErrorOnKeyPress("state");
+  hideErrorOnKeyPress("city");
+  hideErrorOnKeyPress("pin");
+
   return isValid;
 }
+
 
 
 
@@ -457,10 +492,11 @@ function validateForm() {
 
 
 
-const dropArea = document.getElementById('drop-area');
+// const dropArea = document.getElementById('drop-area');
 const inputFile = document.getElementById('input-file');
 const imgView = document.getElementById('img-view');
 inputFile.addEventListener("change", uploadImage);
+
 function uploadImage() {
   let imgLink = URL.createObjectURL(inputFile.files[0]);
   const imgTAG = document.createElement('img');
@@ -470,8 +506,9 @@ function uploadImage() {
   imgView.style.border = 0;
   imgView.style.width = '200px'
 }
-
-
+// document.getElementById("img-view").addEventListener("click", function () {
+//   reader.readAsDataURL(selectedImage);
+// });
 //-------------------------------------- search employee- search bar-----------------------------------------
 
 
@@ -536,10 +573,12 @@ function pagination(totalPages) {
     }
   });
 }
+
+
+
 function viewEmployee(empID) {
   window.location.href = `viewemployee.html?id=${empID}`;
 }
-
 
 // -----------------edit employee upload image-------------------------------
 
@@ -549,9 +588,8 @@ const editEmployeeImageLabel = document.getElementById('editForm-drop-area');
 const editEmployeeFileInput = document.getElementById("editForm-input-file");
 const selectedImage = document.getElementById("image-preview");
 
-editEmployeeFileInput.addEventListener("change", displaySelectedImage);
-
-function displaySelectedImage() {
+editEmployeeFileInput.addEventListener("change", (e)=> {
+  e.preventDefault();
   const file = editEmployeeFileInput.files[0];
 
   if (file) {
@@ -562,12 +600,13 @@ function displaySelectedImage() {
   } else {
     selectedImage.src = "";
   }
-}
+});
 
 const changeButton = document.querySelector("button");
 changeButton.addEventListener("click", changeImage);
 
-function changeImage() {
+function changeImage(event) {
+  event.preventDefault();
   editEmployeeFileInput.click();
 }
 
@@ -599,7 +638,41 @@ function clearForm() {
 
 
 
+// function validateImage() {
+//   const inputFile = document.getElementById("input-file");
+//   const imgView = document.getElementById("img-view");
+//   const dropArea = document.getElementById("drop-area");
 
+//   inputFile.addEventListener("change", function () {
+//       const file = inputFile.files[0];
+
+//       // Check if a file was selected
+//       if (file) {
+//           const fileName = file.name.toLowerCase();
+
+//           // Check if the file extension is valid (PNG or JPG)
+//           if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
+//               // Display the selected image in the card
+//               imgView.innerHTML = `
+//                   <img src="${URL.createObjectURL(file)}" alt="Uploaded Image" style="max-width: 100%; max-height: 100%;">
+//               `;
+//               dropArea.textContent = "Change Image";
+//           } else {
+//               // Reset the input field and display an error message
+//               inputFile.value = "";
+//               imgView.innerHTML = `
+//                   <i class="fa-solid fa-cloud-arrow-up"></i>
+//                   <h5 class="card-heading">Invalid Image</h5>
+//                   <span>PNG, JPG files are allowed</span>
+//               `;
+//               dropArea.textContent = "Click here to upload image";
+//               alert("Only PNG and JPG files are allowed.");
+//           }
+//       }
+//   });
+// }
+
+// window.addEventListener("load", validateImage);
 
 
 

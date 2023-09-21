@@ -471,6 +471,23 @@ i {
     border-radius: 13px;
     border: 3px dashed #B2BAD0;
     background: #FAFCFE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    margin-right: -350px;
+}
+
+.cards {
+    padding: 10px;
+    border-radius: 13px;
+    border: 3px dashed #B2BAD0;
+    background: #FAFCFE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 span {
@@ -825,6 +842,7 @@ input.form-control.rounded-3:focus {
     line-height: 20px;
     letter-spacing: -0.28px;
 }
+
 .card-body-box h5 {
     color: #2B3674;
     font-size: 16px;
@@ -833,9 +851,11 @@ input.form-control.rounded-3:focus {
     line-height: 100%;
     letter-spacing: -0.32px;
 }
+
 .card-body-box {
     padding: 21px 0px 27px 22px;
 }
+
 /* validation alert */
 .error-alert {
     font-size: 12px;
@@ -843,22 +863,28 @@ input.form-control.rounded-3:focus {
     padding-left: 5px;
     display: none;
 }
+
 .error-alert::before {
     content: "*";
     color: red;
 }
+
 .error-alert::after {
     display: none;
 }
+
 #drop-area::after {
     display: none;
 }
+
 .hidden {
     display: none !important;
 }
+
 #editForm-drop-area::after {
     display: none;
 }
+
 #added-emp {
     width: 600px;
     height: 180px;
@@ -872,6 +898,7 @@ input.form-control.rounded-3:focus {
     z-index: 4;
     padding: 20px;
 }
+
 #edited-emp {
     width: 600px;
     height: 180px;
@@ -885,6 +912,7 @@ input.form-control.rounded-3:focus {
     z-index: 4;
     padding: 20px;
 }
+
 #deleted-emp {
     width: 600px;
     height: 180px;
@@ -897,4 +925,14 @@ input.form-control.rounded-3:focus {
     right: 0px;
     z-index: 4;
     padding: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em; 
+}
+::-webkit-scrollbar-thumb {
+    background-color: transparent; 
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
 }
